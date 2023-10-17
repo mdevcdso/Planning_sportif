@@ -1,0 +1,102 @@
+body {
+    margin: 0 auto;
+    background-color: rgb(55, 55, 55);
+}
+
+
+/* FORMULAIRE */
+
+.formulaire {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 6%;
+}
+
+.formulaire form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    width: 30rem;
+    height: auto;
+    backdrop-filter: blur(6px);
+    background-color: rgb(241, 241, 241, 0.3) ;
+    border: rgb(142, 141, 141) solid 2px;
+    border-radius: 1.3rem;
+}
+
+.formulaire label {
+    font-size: large;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: white;
+}
+
+.formulaire input {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+.formulaire select {
+    margin-bottom: 20px;
+    margin-left: 15px;
+}
+
+/* PLANNING */
+
+.planning{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.tableau {
+    display: block;
+    width: 100%;
+    height: 40rem;
+    backdrop-filter: blur(6px);
+    background-color: rgb(241, 241, 241, 0.3) ;
+    border: rgb(142, 141, 141) solid 2px;
+    border-radius: 1.3rem;
+}
+
+.jours {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: rgb(42, 41, 41, 0.6);
+    
+}
+
+/* INFOS */
+
+.infos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+}
+
+.donnees {
+    margin-top: 10rem;
+    font-size: large;
+}
+
+.continuer {
+    margin-top: 2rem;
+}

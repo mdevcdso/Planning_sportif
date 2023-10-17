@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+
+    <link rel="stylesheet" href="planning.html">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-image: url(/img/fond-noir.jpg);">
+    <div class="formulaire">
+        <h1>
+            Connexion
+        </h1>
+        <form action="connexion.php" method="POST" name="creation_compte">
+            <label for="Adresse_email">
+                Adresse email
+                <input type="email" name="email" style="width: 20rem; height: 1.5rem;">
+            </label>
+            
+            <label for="Mot de passe">
+                Mot de passe : 
+                <input type="password" name="Mdp" style="width: 20rem; height: 1.5rem;">
+            </label>
+            
+            <div style="display: flex; justify-content: center; align-items: baseline;">
+                <input type="submit" value="Envoyer" style="width: 5rem; height: 2rem;">
+                <a href="creation_compte.php" style="margin-left: 0.5rem;">Inscription</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+<?php
+    $email;
+    $mdp;
+?>
