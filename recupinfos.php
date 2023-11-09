@@ -20,20 +20,11 @@
                 echo 'Genre : ' . $_POST["genre"] . '<br>';
                 echo 'Adresse email : ' . $_POST["email"] . '<br>';
                 echo 'Rôle : ' . $_POST["role"] . '<br>';
+                echo 'Sport choisi : ' . $_POST["sport"] . '<br>';
                 echo 'Mot de passe : ' . $_POST["Mdp"] . '<br>';
 
-                $serveur = "localhost"; // Adresse du serveur MySQL
-                $utilisateur = "root"; // Nom d'utilisateur MySQL
-                $motdepasse = ""; // Mot de passe MySQL
-                $base_de_donnees = "planning"; // Nom de la base de données
-
                 // Connexion à la base de données
-                $connexion = new mysqli($serveur, $utilisateur, $motdepasse, $base_de_donnees);
-
-                // Vérification de la connexion
-                if ($connexion->connect_error) {
-                    die("Erreur de connexion à la base de données : " . $connexion->connect_error);
-                }
+                require "database.php";
 
                 // Récupération des données du formulaire
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -42,10 +33,55 @@
                     $genre = $_POST["genre"];
                     $email = $_POST["email"];
                     $role = $_POST["role"];
+                    $sport = $_POST["sport"];
                     $mdp = $_POST["Mdp"];
 
-                    // Requête SQL pour insérer les données dans la table "utilisateur"
-                    $requete = "INSERT INTO utilisateurs (nom_utilisateur, prenom_utilisateur, genre_utilisateur, email_utilisateur, mot_de_passe, role) VALUES ('$nom', '$prenom', '$genre', '$email', '$mdp', $role)";
+                    // Masquer le mot de passe
+                    $hash = password_hash($mdp, PASSWORD_DEFAULT);
+
+                    // Requête insertion bdd
+                    if (!empty($email) && !empty($mdp) && !empty($nom) && !empty($prenom)) {
+                        $requete = $connexion->prepare("INSERT INTO utilisateurs (nom_utilisateur, prenom_utilisateur, genre_utilisateur, email_utilisateur, mot_de_passe, role)VALUES (:nom, :prenom, :genre, :email, :mdp, :role)");
+                        $requete->execute([
+                            ":nom" => $nom,
+                            ":prenom" => $prenom,
+                            ":genre" => $genre,
+                            ":email" => $email,
+                            ":mdp" => $hash,
+                            ":role" => $role
+                        ]);
+                    } else {
+                        $errors[] = '<font color="red">Attention, Aucun champs ne doit être vide!</font>';
+                    }
+
+                    // Insérer la valeur de $sport dans la table compte
+                    if (!empty($sport)) {
+                        $sql = "SELECT id_utilisateur FROM utilisateurs ORDER BY id_utilisateur DESC LIMIT 1";
+                        $result = $connexion->query($sql);
+
+                        if ($result->rowCount() > 0) {
+                            $row = $result->fetch();
+                            $id_utilisateur = $row["id_utilisateur"];
+                            echo "La dernière valeur d'id_utilisateur est : " . $id_utilisateur;
+                        } else {
+                            echo "Aucun résultat trouvé.";
+                        }
+                        
+                        $requeteCompte = $connexion->prepare("INSERT INTO compte (sport_choisi, id_utilisateur) VALUES (:sport, :id_utilisateur)");
+                        $requeteCompte->execute([
+                            ":sport" => $sport,
+                            ":id_utilisateur" => $id_utilisateur
+                        ]);
+
+                        // Vérifiez si l'insertion s'est effectuée avec succès
+                        if ($requeteCompte) {
+                            echo ". Sport choisi inséré avec succès dans la table compte.";
+                        } else {
+                            echo "Erreur lors de l'insertion du sport choisi : " . $connexion->error;
+                        }
+                    } else {
+                        echo "Le champ sport est vide, veuillez le remplir.";
+                    }
 
                     // Exécution de la requête
                     if ($connexion->query($requete) === TRUE) {

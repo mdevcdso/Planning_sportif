@@ -13,51 +13,26 @@
     <h1>Résultats de la base de données</h1>
 
     <?php
-        //Configuration de la connexion a la bdd
-        $serveur = "localhost";
-        $utilisateur = "root";
-        $motDePasse = "";
-        $bdd = "planning";
-
-        $estConnecte = false;
-
-        //Etape 2 : Etablir la connexion
-        try 
-        {
-            $connexion = new PDO("mysql:host=$serveur;dbname=$bdd",$utilisateur,$motDePasse);
-        } catch(PDOException $e) {
-            die("Erreur de connexion : ".$e->getMessage());
-        }
+        //Etablir la connexion
+        require "database.php";
 
         //Requêtes SQL SELECT
-        $query = $connexion->prepare("SELECT * FROM utilisateurs");
-        $query->execute();
-        $results = $query->fetchAll(PDO::FETCH_ASSOC);
-        
-        $email = $_POST["email"];
-        $mdp = $_POST["Mdp"];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $email = $_POST["email"];
+            $mdp = $_POST["Mdp"];
 
-        if(count($results)>0) 
-        {
-            echo "<ul>";
-            foreach($results as $utilisateur) 
-            {
-                if($email == $utilisateur['email_utilisateur'] && $motDePasse == $utilisateur['mot_de_passe'])
-                {
-                    $estConnecte = true;
-                }
-
-                if($estConnecte)
-                {
-                    echo 'Connexion réussie !!';
-                } else 
-                {
-                    echo 'Echec lors de la connexion.';
-                }
+            // Requête SQL pour vérifier les informations de connexion
+            $requete = $connexion->prepare("SELECT * FROM utilisateurs WHERE email_utilisateur = :email");
+            $requete->execute([":email" => $email]);
+            $utilisateur = $requete->fetch();
+            
+            if ($utilisateur && password_verify($mdp, $utilisateur["mot_de_passe"])) {
+                header("Location: planning.html");
+                exit;
+            } else {
+                echo '<font color="white">Échec de la connexion.</font>';
+                var_dump($requete->errorInfo());
             }
-        } else
-        {
-            echo "<p>Aucun résultat trouvé.<p>";
         }
 
         //Etape 4 : Fermeture de la connexion à la base de données

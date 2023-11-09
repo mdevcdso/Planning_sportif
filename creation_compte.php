@@ -46,6 +46,21 @@
                     <option value="Visionneur">Visionneur</option>
                 </select>
             </label>
+
+            <label for="Sport">
+                Sport(s) de préférence : 
+                <select name="sport" id="Sport">
+                    <option value="Football">Football</option>
+                    <option value="Basketball">Basketball</option>
+                    <option value="Rugby">Rugby</option>
+                    <option value="Hockey_sur_glace">Hockey sur glace</option>
+                    <option value="Volley-ball">Volley-ball</option>
+                    <option value="Handball">Handball</option>
+                    <option value="Polo">Polo</option>
+                    <option value="Ultimate_Frisbee">Ultimate Frisbee</option>
+                    <option value="Quidditch">Quidditch</option>
+                </select>
+            </label>
             
             <label for="Mot de passe">
                 Mot de passe : 
@@ -67,5 +82,6 @@ $nom;
 $genre;
 $email;
 $role;
+$sport;
 $mdp;
 ?>

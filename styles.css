@@ -82,6 +82,43 @@ h1 {
     
 }
 
+.contenu-tableau {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.jour {
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.jour:last-child {
+    border-right: none; 
+}
+
+.cases-tableau {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cases-tableau li {
+    flex: 0 0 48%; 
+    margin-bottom: 20px;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(68, 67, 67, 0.5);
+    margin: 10px 0;
+}
+
 /* INFOS */
 
 .infos {
