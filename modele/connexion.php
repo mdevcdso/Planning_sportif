@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion BDD</title>
 
-    <link rel="stylesheet" href="planning.html">
+    <link rel="stylesheet" href="planning.php">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body style="background-image: url(/img/fond-noir.jpg);">
@@ -27,7 +27,7 @@
             $utilisateur = $requete->fetch();
             
             if ($utilisateur && password_verify($mdp, $utilisateur["mot_de_passe"])) {
-                header("Location: planning.html");
+                header("Location: planning.php");
                 exit;
             } else {
                 echo '<font color="white">Échec de la connexion.</font>';

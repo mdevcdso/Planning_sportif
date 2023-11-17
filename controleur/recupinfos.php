@@ -95,7 +95,7 @@
                 }
             ?>
         </div>
-        <a href="planning.html" class="continuer">
+        <a href="planning.php" class="continuer">
             <button>
                 Continuer
             </button>

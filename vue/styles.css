@@ -47,6 +47,58 @@ body {
 
 /* PLANNING */
 
+.bouton-menu {
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.menu-latéral {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    height: 100%;
+    width: 200px;
+    background-color: rgb(5, 5, 5);
+    padding-top: 20px;
+    transition: left 0.5s;
+    z-index: 1;
+}
+
+.menu-latéral p {
+    color: white;
+}
+
+.menu-latéral.visible {
+    left: 0;
+}
+
+.contenu-decalé {
+    margin-left: 250px;
+    transition: margin-left 0.5s;
+}
+
+.bouton-menu button.bouton-decalé {
+    left: 250px;
+}
+
+.menu {
+    color: white;
+}
+
+.menu-item:hover {
+    background-color: #333;
+}
+
+.sub-items {
+    display: none;
+    color: white;
+}
+
+.sub-item:hover {
+    background-color: #555;
+}
+
+
 .planning{
     display: flex;
     justify-content: center;
@@ -58,14 +110,14 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .tableau {
     display: block;
-    width: 100%;
-    height: 40rem;
+    width: 70rem;
     backdrop-filter: blur(6px);
     background-color: rgb(241, 241, 241, 0.3) ;
     border: rgb(142, 141, 141) solid 2px;
@@ -82,17 +134,15 @@ h1 {
     
 }
 
-.contenu-tableau {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
+.grille-planning {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
 }
 
 .jour {
     border-right: 2px solid rgba(255, 255, 255, 0.5);
     padding-right: 20px;
-    margin-right: 20px;
 }
 
 .jour:last-child {
@@ -105,6 +155,7 @@ h1 {
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 .cases-tableau li {
@@ -116,7 +167,7 @@ h1 {
     width: 100%;
     height: 2px;
     background-color: rgba(68, 67, 67, 0.5);
-    margin: 10px 0;
+    margin: 20px 0;
 }
 
 /* INFOS */
