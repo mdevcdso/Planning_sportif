@@ -6,23 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire</title>
 
-    <link rel="stylesheet" href="planning.php">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/vue/planning.php">
+    <link rel="stylesheet" href="/vue/styles.css">
 </head>
-<body style="background-image: url(/img/fond-noir.jpg);">
+<body>
     <div class="formulaire">
         <h1>
             Création de compte
         </h1>
-        <form action="recupinfos.php" method="POST" name="creation_compte">
+        <form action="../controleur/creation_compte_controller.php" method="POST" name="creation_compte">
             <label for="Nom"> 
                 Nom :
-                <input type="text" name="nom" style="width: 20rem; height: 1.5rem;">
+                <input type="text" name="nom" required style="width: 20rem; height: 1.5rem;">
             </label>
             
             <label for="Prénom">
                 Prénom : 
-                <input type="text" name="prenom" style="width: 20rem; height: 1.5rem;">
+                <input type="text" name="prenom" required style="width: 20rem; height: 1.5rem;">
             </label>
     
             <label for="Genre">
@@ -36,7 +36,12 @@
             
             <label for="Adresse_email">
                 Adresse email
-                <input type="email" name="email" style="width: 20rem; height: 1.5rem;">
+                <input type="email" name="email" required style="width: 20rem; height: 1.5rem;">
+            </label>
+
+            <label for="Mot de passe">
+                Mot de passe : 
+                <input type="password" name="mdp" required style="width: 20rem; height: 1.5rem;">
             </label>
 
             <label for="Role">
@@ -62,14 +67,9 @@
                 </select>
             </label>
             
-            <label for="Mot de passe">
-                Mot de passe : 
-                <input type="password" name="Mdp" style="width: 20rem; height: 1.5rem;">
-            </label>
-            
             <div style="display: flex; justify-content: center; align-items: baseline;">
-                <input type="submit" value="Envoyer" style="width: 5rem; height: 2rem;">
-                <a href="connexion.html" style="margin-left: 0.5rem;">Connexion</a>
+                <input type="submit" value="Créer le compte" style="width: auto; height: 2rem;">
+                <a href="/vue/connexion.html" style="margin-left: 0.5rem;">Connexion</a>
             </div>
         </form>
     </div>
@@ -81,7 +81,7 @@ $prenom;
 $nom;
 $genre;
 $email;
+$mdp;
 $role;
 $sport;
-$mdp;
 ?>

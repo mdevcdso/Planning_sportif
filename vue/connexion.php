@@ -6,28 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
 
-    <link rel="stylesheet" href="planning.php">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/vue/planning.php">
+    <link rel="stylesheet" href="/vue/styles.css">
 </head>
 <body style="background-image: url(/img/fond-noir.jpg);">
     <div class="formulaire">
         <h1>
             Connexion
         </h1>
-        <form action="connexion.php" method="POST" name="creation_compte">
+        <form action="../controleur/connexion_controller.php" method="POST" name="connexion">
             <label for="Adresse_email">
                 Adresse email
-                <input type="email" name="email" style="width: 20rem; height: 1.5rem;">
+                <input type="email" name="email" required style="width: 20rem; height: 1.5rem;">
             </label>
             
             <label for="Mot de passe">
                 Mot de passe : 
-                <input type="password" name="Mdp" style="width: 20rem; height: 1.5rem;">
+                <input type="password" name="mdp" required style="width: 20rem; height: 1.5rem;">
             </label>
             
             <div style="display: flex; justify-content: center; align-items: baseline;">
-                <input type="submit" value="Envoyer" style="width: 5rem; height: 2rem;">
-                <a href="creation_compte.php" style="margin-left: 0.5rem;">Inscription</a>
+                <input type="submit" value="Se connecter" style="width: auto; height: 2rem;">
+                <a href="../vue/creation_compte.php" style="margin-left: 0.5rem;">Inscription</a>
             </div>
         </form>
     </div>

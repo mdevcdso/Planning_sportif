@@ -3,9 +3,11 @@ $menuItems = array(
     array(
         'name' => 'Gestion des matchs',
         'subItems' => array(
-            'Ajouter',
-            'Modifier',
-            'Supprimer'
+            'Planning' => '../vue/planning.php',
+            'Ajouter un match' => '../vue/ajouter_match.php',
+            'Modifier un match' => '../vue/modifier_match.php',
+            'Supprimer un match' => '../vue/supprimer_match.php',
+            'Se déconnecter' => '../controleur/deconnexion_controller.php'
         )
     ),
     array(
@@ -25,19 +27,3 @@ $menuItems = array(
         'subItems' => array()
     )
 );
-?>
-
-<ul class="menu">
-    <?php foreach ($menuItems as $menuItem): ?>
-        <li class="menu-item" data-menu="<?php echo $menuItem['name']; ?>">
-            <?php echo $menuItem['name']; ?>
-            <?php if (!empty($menuItem['subItems'])): ?>
-                <ul class="sub-items" data-submenu="<?php echo $menuItem['name']; ?>">
-                    <?php foreach ($menuItem['subItems'] as $subItem): ?>
-                        <li class="sub-item"><?php echo $subItem; ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
-        </li>
-    <?php endforeach; ?>
-</ul>

@@ -15,6 +15,9 @@
         </h1>
         <div class="donnees">
             <?php
+                // Connexion à la base de données
+                require "../modele/database.php";
+
                 echo 'Prénom : ' . $_POST["prenom"] . '<br>';
                 echo 'Nom : ' . $_POST["nom"] . '<br>';
                 echo 'Genre : ' . $_POST["genre"] . '<br>';
@@ -22,9 +25,6 @@
                 echo 'Rôle : ' . $_POST["role"] . '<br>';
                 echo 'Sport choisi : ' . $_POST["sport"] . '<br>';
                 echo 'Mot de passe : ' . $_POST["Mdp"] . '<br>';
-
-                // Connexion à la base de données
-                require "database.php";
 
                 // Récupération des données du formulaire
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -95,7 +95,7 @@
                 }
             ?>
         </div>
-        <a href="planning.php" class="continuer">
+        <a href="../vue/planning.php" class="continuer">
             <button>
                 Continuer
             </button>

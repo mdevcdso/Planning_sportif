@@ -52,14 +52,28 @@ body {
     padding-left: 20px;
 }
 
+.fermer-menu {
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.menu-latéral button img {
+    width: 15px;
+    height: auto;
+}
+
 .menu-latéral {
     position: fixed;
-    left: -250px;
+    left: -270px;
     top: 0;
     height: 100%;
-    width: 200px;
+    width: 250px;
     background-color: rgb(5, 5, 5);
     padding-top: 20px;
+    padding-right: 5px;
     transition: left 0.5s;
     z-index: 1;
 }
@@ -70,6 +84,11 @@ body {
 
 .menu-latéral.visible {
     left: 0;
+}
+
+.titre-decalé {
+    margin-left: 250px;
+    transition: margin-left 0.5s;
 }
 
 .contenu-decalé {
@@ -85,6 +104,10 @@ body {
     color: white;
 }
 
+.menu-item {
+    list-style: none;
+}
+
 .menu-item:hover {
     background-color: #333;
 }
@@ -92,6 +115,7 @@ body {
 .sub-items {
     display: none;
     color: white;
+    list-style: none;
 }
 
 .sub-item:hover {
