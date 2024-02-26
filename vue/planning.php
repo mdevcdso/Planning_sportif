@@ -6,6 +6,14 @@ if (!isset($_SESSION['email_utilisateur'])) {
     header('Location: ../vue/connexion.php');
     exit();
 }
+
+require_once '../modele/matchs.php';
+require_once '../modele/equipes.php';
+require_once '../modele/joueurs.php';
+
+$matchs = Matchs::getMatchs();
+$equipes = Equipes::getEquipes();
+$joueurs = Joueurs::getJoueurs();
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +30,7 @@ if (!isset($_SESSION['email_utilisateur'])) {
             <button onclick="toggleMenu()">Menu</button>
         </div>
         <div class="menu-latéral">
-            <h2 style="color: white;">Bonjour !</h2>
+            <h2 style="color: white;">Menu</h2>
             <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
             <?php require('../controleur/menu.php'); ?>
             <ul class="menu">
@@ -70,111 +78,26 @@ if (!isset($_SESSION['email_utilisateur'])) {
                 </div>
                 <div class="tableau">
                     <div class="grille-planning">
-                        <div class="jour">
-                            <ul class="cases-tableau">
-                                <li>
-                                    <h4>Match 1</h4>
-                                    <p>17:00 - 18:30</p>
-                                    <p>Football</p>
-                                </li>
-                                <div class="divider"></div>
-                                <li>
-                                    <h4>Match 2</h4>
-                                    <p>19:00 - 20:30</p>
-                                    <p>Basketball</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="jour">
-                            <ul class="cases-tableau">
-                                <li>
-                                    <h4>Match 1</h4>
-                                    <p>17:00 - 18:30</p>
-                                    <p>Football</p>
-                                </li>
-                                <div class="divider"></div>
-                                <li>
-                                    <h4>Match 2</h4>
-                                    <p>19:00 - 20:30</p>
-                                    <p>Basketball</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="jour">
-                            <ul class="cases-tableau">
-                                <li>
-                                    <h4>Match 1</h4>
-                                    <p>17:00 - 18:30</p>
-                                    <p>Football</p>
-                                </li>
-                                <div class="divider"></div>
-                                <li>
-                                    <h4>Match 2</h4>
-                                    <p>19:00 - 20:30</p>
-                                    <p>Basketball</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="jour">
-                            <ul class="cases-tableau">
-                                <li>
-                                    <h4>Match 1</h4>
-                                    <p>17:00 - 18:30</p>
-                                    <p>Football</p>
-                                </li>
-                                <div class="divider"></div>
-                                <li>
-                                    <h4>Match 2</h4>
-                                    <p>19:00 - 20:30</p>
-                                    <p>Basketball</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="jour">
-                            <ul class="cases-tableau">
-                                <li>
-                                    <h4>Match 1</h4>
-                                    <p>17:00 - 18:30</p>
-                                    <p>Football</p>
-                                </li>
-                                <div class="divider"></div>
-                                <li>
-                                    <h4>Match 2</h4>
-                                    <p>19:00 - 20:30</p>
-                                    <p>Basketball</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="jour">
-                            <ul class="cases-tableau">
-                                <li>
-                                    <h4>Match 1</h4>
-                                    <p>17:00 - 18:30</p>
-                                    <p>Football</p>
-                                </li>
-                                <div class="divider"></div>
-                                <li>
-                                    <h4>Match 2</h4>
-                                    <p>19:00 - 20:30</p>
-                                    <p>Basketball</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="jour">
-                            <ul class="cases-tableau">
-                                <li>
-                                    <h4>Match 1</h4>
-                                    <p>17:00 - 18:30</p>
-                                    <p>Football</p>
-                                </li>
-                                <div class="divider"></div>
-                                <li>
-                                    <h4>Match 2</h4>
-                                    <p>19:00 - 20:30</p>
-                                    <p>Basketball</p>
-                                </li>
-                            </ul>
-                        </div>
+                        <?php $matchsGroupedByDate = Matchs::groupMatchsByDate($matchs);
+                        foreach ($matchsGroupedByDate as $matchsByDate): ?>
+                            <div class="jour">
+                                <ul class="cases-tableau">
+                                    <?php foreach ($matchsByDate as $match): ?>
+                                        <li>
+                                            <h4><?= $match['titre']; ?></h4>
+                                            <p><?= date('H:i', strtotime($match['date_match'])); ?> - <?= date('H:i', strtotime($match['date_match'] . ' + ' . $match['duree'])); ?></p>
+                                            <p><?= date('d/m/Y', strtotime($match['date_match'])); ?></p>
+                                            <p><?= $match['lieu_match']; ?></p>
+                                            <!-- Afficher le nom des équipes -->
+                                            <?php $equipesMatch = Equipes::getEquipesForMatch($match['Id_Matchs']); ?>
+                                            <?php foreach ($equipesMatch as $equipe): ?>
+                                                <p><?= $equipe['nom_equipe']; ?></p>
+                                            <?php endforeach; ?>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -222,7 +145,6 @@ if (!isset($_SESSION['email_utilisateur'])) {
                     }
                 });
             });
-
         </script>
     </body>
     </html>

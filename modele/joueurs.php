@@ -1,4 +1,6 @@
 <?php
+require_once '../modele/config.php';
+
 class Joueurs {
     private $id_joueur;
     private $nom_joueurs;
@@ -17,7 +19,13 @@ class Joueurs {
     }
 
     // Getters et Setters
-    // ...
+    public static function getJoueurs() {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "SELECT * FROM joueurs";
+        $stmt = $bdd->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     // Méthodes CRUD
     // ...

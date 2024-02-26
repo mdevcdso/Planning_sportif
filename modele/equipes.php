@@ -1,4 +1,6 @@
 <?php
+require_once '../modele/config.php';
+
 class Equipes {
     private $id_equipe;
     private $nom_equipe;
@@ -19,8 +21,23 @@ class Equipes {
     }
 
     // Getters et Setters
-    // ...
+    public static function getEquipes() {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "SELECT * FROM equipes";
+        $stmt = $bdd->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
+    public static function getEquipesForMatch($matchId) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "SELECT equipes.nom_equipe FROM equipes JOIN participer ON equipes.id_equipe = participer.id_equipe WHERE participer.Id_Matchs = :matchId";
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':matchId', $matchId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     // Méthodes CRUD
     // ...
 }

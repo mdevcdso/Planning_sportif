@@ -10,9 +10,20 @@ class Participer {
     }
 
     // Getters et Setters
-    // ...
+    public function getIdMatchs() {
+        return $this->id_matchs;
+    }
 
-    // Méthodes CRUD
-    // ...
+    public function getIdEquipe() {
+        return $this->id_equipe;
+    }
+
+    public function setIdMatchs($idMatchs) {
+        $this->id_matchs = $idMatchs;
+    }
+
+    public function setIdEquipe($idEquipe) {
+        $this->id_equipe = $idEquipe;
+    }
 }
 ?>
