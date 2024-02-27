@@ -27,7 +27,21 @@ class Joueurs {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Méthodes CRUD
-    // ...
+    public static function getJoueursByEquipe($idEquipe) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "SELECT * FROM joueurs WHERE id_equipe = :idEquipe";
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':idEquipe', $idEquipe, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public static function supprimerJoueur($idJoueur) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "DELETE FROM joueurs WHERE id_joueur = :idJoueur";
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':idJoueur', $idJoueur, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
 ?>

@@ -29,6 +29,17 @@ class Equipes {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getEquipeIdByName($nomEquipe) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "SELECT id_equipe FROM equipes WHERE nom_equipe = :nomEquipe";
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':nomEquipe', $nomEquipe, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return ($result) ? $result['id_equipe'] : null;
+    }
+
     public static function getEquipesForMatch($matchId) {
         $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
         $query = "SELECT equipes.nom_equipe FROM equipes JOIN participer ON equipes.id_equipe = participer.id_equipe WHERE participer.Id_Matchs = :matchId";
@@ -37,8 +48,13 @@ class Equipes {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-    // Méthodes CRUD
-    // ...
+
+    public static function supprimerEquipe($idEquipe) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "DELETE FROM equipes WHERE id_equipe = :idEquipe";
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':idEquipe', $idEquipe, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
 ?>

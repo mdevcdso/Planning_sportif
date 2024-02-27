@@ -9,9 +9,12 @@ class Sport {
     }
 
     // Getters et Setters
-    // ...
-
-    // Méthodes CRUD
-    // ...
+    public static function getNomsSports() {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "SELECT nom_sport FROM sport";
+        $stmt = $bdd->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
 }
 ?>

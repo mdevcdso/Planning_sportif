@@ -25,5 +25,13 @@ class Participer {
     public function setIdEquipe($idEquipe) {
         $this->id_equipe = $idEquipe;
     }
+
+    public static function supprimerParticipationsPourMatch($idMatchs) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "DELETE FROM participer WHERE Id_Matchs = :idMatchs";
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':idMatchs', $idMatchs, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
 ?>

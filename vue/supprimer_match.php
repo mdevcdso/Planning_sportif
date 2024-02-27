@@ -10,12 +10,20 @@
 </head>
 <body>
     <h1>Supprimer un match</h1>
-    <form action="../controleur/supprimer_match_controller.php" method="POST">
-        <!-- Ajoutez ici les champs nécessaires pour supprimer un match -->
-        <label for="id_match">ID du match à supprimer :</label>
-        <input type="text" name="id_match" required><br>
 
-        <input type="submit" value="Supprimer">
+    <form action="../controleur/supprimer_match_controller.php" method="post">
+        <label for="match">Sélectionner le match à supprimer :</label>
+        <select name="match_id" id="match_id">
+            <?php
+                require_once '../modele/matchs.php';
+                $matchs = Matchs::getMatchs();
+                foreach ($matchs as $match) {
+                    echo "<option value='{$match['Id_Matchs']}'>{$match['titre']}</option>";
+                }            
+            ?>
+        </select>
+
+        <input type="submit" value="Supprimer le match">
     </form>
 </body>
 </html>

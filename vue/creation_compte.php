@@ -55,15 +55,22 @@
             <label for="Sport">
                 Sport(s) de préférence : 
                 <select name="sport" id="Sport">
-                    <option value="Football">Football</option>
-                    <option value="Basketball">Basketball</option>
-                    <option value="Rugby">Rugby</option>
-                    <option value="Hockey_sur_glace">Hockey sur glace</option>
-                    <option value="Volley-ball">Volley-ball</option>
-                    <option value="Handball">Handball</option>
-                    <option value="Polo">Polo</option>
-                    <option value="Ultimate_Frisbee">Ultimate Frisbee</option>
-                    <option value="Quidditch">Quidditch</option>
+                    <?php
+                        // Inclure la configuration de la base de données ici
+                        require_once '../modele/config.php';
+                        require_once '../modele/sport.php';
+
+                        // Sélectionner tous les sports depuis la table Sport
+                        $result = Sport::getNomsSports();
+
+                        // Boucler à travers les résultats et créer une option pour chaque sport
+                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="' . $row['nom_sport'] . '">' . $row['nom_sport'] . '</option>';
+                        }
+
+                        // Fermer la connexion à la base de données
+                        $connexion = null;
+                    ?>
                 </select>
             </label>
             

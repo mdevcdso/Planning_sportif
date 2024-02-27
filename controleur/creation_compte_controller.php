@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Vérifiez si l'insertion s'est effectuée avec succès
                 if ($requeteCompte) {
-                    echo ". Sport choisi inséré avec succès dans la table compte.";
                     // Rediriger vers la page de connexion après la création du compte
                     header('Location: ../vue/connexion.php');
                     exit();

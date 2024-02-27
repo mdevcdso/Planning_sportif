@@ -130,13 +130,32 @@ body {
     padding: 20px;
 }
 
-h1 {
+.tete_planning {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.mois {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.jour {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
 }
 
 .tableau {
