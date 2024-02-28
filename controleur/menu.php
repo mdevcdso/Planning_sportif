@@ -11,19 +11,9 @@ $menuItems = array(
         )
     ),
     array(
-        'name' => 'Matchs favoris',
-        'subItems' => array()
-    ),
-    array(
-        'name' => 'Notifications',
-        'subItems' => array()
-    ),
-    array(
-        'name' => 'Design Planning',
-        'subItems' => array()
-    ),
-    array(
         'name' => 'Paramètres du compte',
-        'subItems' => array()
+        'subItems' => array(
+            'Modifier le mot de passe' => '../vue/parametres.php'
+        )
     )
 );

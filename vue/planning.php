@@ -25,34 +25,36 @@ $joueurs = Joueurs::getJoueurs();
         <title>Planning</title>
         <link rel="stylesheet" href="../vue/styles.css">
     </head>
-    <body>
-        <div class="bouton-menu">
-            <button onclick="toggleMenu()">Menu</button>
-        </div>
-        <div class="menu-latéral">
-            <h2 style="color: white;">Menu</h2>
-            <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
-            <?php require('../controleur/menu.php'); ?>
-            <ul class="menu">
-                <?php foreach ($menuItems as $menuItem): ?>
-                    <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
-                        <?= $menuItem['name']; ?>
-                        <?php if (!empty($menuItem['subItems'])): ?>
-                            <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
-                                <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
-                                    <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
+    <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+        <div class="container2">
+            <div class="bouton-menu">
+                <button onclick="toggleMenu()">Menu</button>
+            </div>
+            <div class="menu-latéral">
+                <h2 style="color: white;">Menu</h2>
+                <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
+                <?php require('../controleur/menu.php'); ?>
+                <ul class="menu">
+                    <?php foreach ($menuItems as $menuItem): ?>
+                        <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
+                            <?= $menuItem['name']; ?>
+                            <?php if (!empty($menuItem['subItems'])): ?>
+                                <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
+                                    <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
+                                        <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
 
-        <div class="planning-content" id="planningContent">
-            <?php
-                include '../vue/semaine.php';
-            ?>
+            <div class="planning-content" id="planningContent">
+                <?php
+                    include '../vue/semaine.php';
+                ?>
+            </div>
         </div>
 
         <script>
