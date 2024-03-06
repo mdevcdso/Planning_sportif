@@ -10,9 +10,9 @@ Ce planning est conçu pour faciliter la vie des organisateurs et entraîneurs e
 - 🏟️ **Détails des Matchs :** Obtenez des informations détaillées sur chaque match, y compris les équipes participantes, l'emplacement et l'heure.
 - 📊 **Statistiques :** Suivez les performances de l'équipe et analysez les statistiques des matchs.
 
-## Architecture MVVM 🏗️
+## Architecture MVC 🏗️
 
-Ce projet est développé en suivant l'architecture MVVM (Modèle-Vue-Modèle-Vue). Voici comment les différentes couches sont organisées :
+Ce projet est développé en suivant l'architecture MVC (Modèle-Vue-Contrôleur). Voici comment les différentes couches sont organisées :
 
 - 🧩 **Modèle (Model) :** Représente les données et la logique métier.
 - 👁️ **Vue (View) :** Gère l'interface utilisateur et l'affichage des données.
