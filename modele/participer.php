@@ -26,6 +26,24 @@ class Participer {
         $this->id_equipe = $idEquipe;
     }
 
+    public static function insererParticipation($idMatchs, $idEquipe) {
+        try {
+            $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+
+            $query = "INSERT INTO participer (Id_Matchs, id_equipe) VALUES (:id_match, :id_equipe)";
+            $stmt = $bdd->prepare($query);
+            $stmt->bindParam(':id_match', $idMatchs);
+            $stmt->bindParam(':id_equipe', $idEquipe);
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            // Gérez les erreurs liées à la base de données ici
+            echo "Erreur : " . $e->getMessage() . "<br>";
+            return false;
+        }
+    }
+
     public static function supprimerParticipationsPourMatch($idMatchs) {
         $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
         $query = "DELETE FROM participer WHERE Id_Matchs = :idMatchs";

@@ -52,11 +52,17 @@ for ($i = 0; $i < 7; $i++) {
                                     <p><?= date('H:i', strtotime($match['date_match'])); ?> - <?= date('H:i', strtotime($match['date_match'] . ' + ' . $match['duree'])); ?></p>
                                     <p><?= date('d/m/Y', strtotime($match['date_match'])); ?></p>
                                     <p><?= $match['lieu_match']; ?></p>
-                                    <!-- Afficher le nom des équipes -->
+
+                                    <!-- Afficher le nom des équipes et le bouton pour saisir les équipes et joueurs -->
                                     <?php $equipesMatch = Equipes::getEquipesForMatch($match['Id_Matchs']); ?>
-                                    <?php foreach ($equipesMatch as $equipe): ?>
-                                        <p><?= $equipe['nom_equipe']; ?></p>
-                                    <?php endforeach; ?>
+
+                                    <?php if (!empty($equipesMatch)): ?>
+                                        <?php foreach ($equipesMatch as $equipe): ?>
+                                            <p><?= $equipe['nom_equipe']; ?></p>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <a href="../vue/ajouter_equipes_joueurs.php?id_match=<?= $match['Id_Matchs']; ?>"><button>Ajouter des équipes</button></a>
+                                    <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
                         </ul>

@@ -49,6 +49,16 @@ class Matchs {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function getLastInsertedMatchId() {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "SELECT MAX(Id_Matchs) AS last_inserted_id FROM matchs";
+        $stmt = $bdd->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return isset($result['last_inserted_id']) ? $result['last_inserted_id'] : null;
+    }    
+
     public static function modifierMatch($id, $nouvellesDonnees) {
         $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

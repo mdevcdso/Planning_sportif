@@ -22,68 +22,11 @@
         <label for="lieu_match">Lieu :</label>
         <input type="text" name="lieu_match" required><br>
 
-
-        <label for="equipe1">Équipe 1 :</label>
-        <input type="text" name="equipe1" required><br>
-
-        <label for="nombre_joueurs1">Nombre de joueurs dans l'équipe 1 :</label>
-        <input type="number" name="nombre_joueurs1" required><br>
-
-        <label for="nom_entraineur1">Nom de l'entraineur de l'équipe 1 :</label>
-        <input type="text" name="nom_entraineur1" required><br>
-
-        <label for="ratio1">Ratio de l'équipe 1 :</label>
-        <input type="number" name="ratio1" step="0.01" required><br>
-
-        <label for="nombre_victoire1">Nombre de victoires de l'équipe 1 :</label>
-        <input type="number" name="nombre_victoire1" required><br>
-
-        <label for="nombre_defaite1">Nombre de défaites de l'équipe 1 :</label>
-        <input type="number" name="nombre_defaite1" required><br>
-
-
-        <!-- Joueurs de l'équipe 1 -->
-        <label for="joueurs_equipe1">Joueurs de l'équipe 1 :</label>
-        <div id="joueurs_equipe1_container">
-            <!-- Champ pour le premier joueur -->
-            <input type="text" name="joueur_equipe1[]" placeholder="Nom, Prénom, Âge, Rôle" required><br>
-        </div>
-        <button type="button" onclick="ajouterJoueur('joueurs_equipe1_container')">Ajouter un joueur</button><br>
-
-
-        <label for="equipe2">Équipe 2 :</label>
-        <input type="text" name="equipe2" required><br>
-
-        <label for="nombre_joueurs2">Nombre de joueurs dans l'équipe 2 :</label>
-        <input type="number" name="nombre_joueurs2" required><br>
-
-        <label for="nom_entraineur2">Nom de l'entraineur de l'équipe 2 :</label>
-        <input type="text" name="nom_entraineur2" required><br>
-
-        <label for="ratio2">Ratio de l'équipe 2 :</label>
-        <input type="number" name="ratio2" step="0.01" required><br>
-
-        <label for="nombre_victoire2">Nombre de victoires de l'équipe 2 :</label>
-        <input type="number" name="nombre_victoire2" required><br>
-
-        <label for="nombre_defaite2">Nombre de défaites de l'équipe 2 :</label>
-        <input type="number" name="nombre_defaite2" required><br>
-
-
-        <!-- Joueurs de l'équipe 2 -->
-        <label for="joueurs_equipe2">Joueurs de l'équipe 2 :</label>
-        <div id="joueurs_equipe2_container">
-            <!-- Champ pour le premier joueur -->
-            <input type="text" name="joueur_equipe2[]" placeholder="Nom, Prénom, Âge, Rôle" required><br>
-        </div>
-        <button type="button" onclick="ajouterJoueur('joueurs_equipe2_container')">Ajouter un joueur</button><br>
-
-
         <label for="description_match">Description :</label>
         <textarea name="description_match" rows="4" cols="50"></textarea><br>
 
         <label for="score">Score :</label>
-        <input type="number" name="score" required><br>
+        <input type="number" name="score"><br>
 
         <input type="submit" value="Ajouter">
     </form>
