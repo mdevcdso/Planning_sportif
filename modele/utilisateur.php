@@ -28,7 +28,7 @@ class Utilisateur {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($user && password_verify($mdp, $user['mot_de_passe'])) {
+        if ($user && password_verify($motDePasse, $user['mot_de_passe'])) {
             // La vérification a réussi
             return true;
         } else {

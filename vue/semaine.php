@@ -22,7 +22,6 @@ for ($i = 0; $i < 7; $i++) {
 }
 ?>
 <div class="tete_planning">
-    <button onclick="togglePlanningView()">Changer de vue</button>
     <a href="?week=<?= $prevWeekMonday; ?>" class="arrow">❮</a>
     <h1>
         Planning
