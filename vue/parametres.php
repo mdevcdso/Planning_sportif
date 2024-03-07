@@ -11,7 +11,7 @@
     <div class="login wrap">
         <h1 style="margin-bottom: 4rem;">Paramètres du compte</h1>
         
-        <form action="../controleur/modifier_mot_de_passe.php" method="post" onsubmit="return validatePasswords()">
+        <form action="../controleur/modifier_mot_de_passe.php" method="POST" onsubmit="return validatePasswords()">
             <div class="password-container">
                 <div>
                     <label for="nouveau_mot_de_passe">Nouveau mot de passe :</label>

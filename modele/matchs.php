@@ -57,7 +57,7 @@ class Matchs {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
     
         return isset($result['last_inserted_id']) ? $result['last_inserted_id'] : null;
-    }    
+    }  
 
     public static function modifierMatch($id, $nouvellesDonnees) {
         $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
@@ -72,7 +72,7 @@ class Matchs {
         $stmt->bindParam(':date_match', $nouvellesDonnees['date_match'], PDO::PARAM_STR);
         $stmt->bindParam(':lieu_match', $nouvellesDonnees['lieu_match'], PDO::PARAM_STR);
         $stmt->bindParam(':description_match', $nouvellesDonnees['description_match'], PDO::PARAM_STR);
-        $stmt->bindParam(':score', $nouvellesDonnees['score'], PDO::PARAM_INT);
+        $stmt->bindParam(':score', $nouvellesDonnees['score'], PDO::PARAM_STR);
 
         $success = $stmt->execute();
 
@@ -84,6 +84,17 @@ class Matchs {
         $query = "DELETE FROM matchs WHERE Id_Matchs = :id";
         $stmt = $bdd->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public static function saisirScores($id, $score) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "UPDATE matchs SET score = :score WHERE Id_Matchs = :id";
+        
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':score', $score, PDO::PARAM_STR);
+
         return $stmt->execute();
     }
     

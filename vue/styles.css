@@ -39,6 +39,25 @@ body {
     background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
   }
   
+  .container3 {
+    width: 100%;
+    height: 100%;
+    --s: 37px; /* control the size */
+  
+    --c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
+    --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
+    --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
+    --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
+    background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
+      var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
+      var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
+    background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
+
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin: 0;
+  }
 
 /* FORMULAIRE */
 
@@ -67,7 +86,6 @@ body {
 .formulaire label {
     font-size: large;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: white;
 }
 
 .formulaire input {
@@ -79,6 +97,25 @@ body {
 .formulaire select {
     margin-bottom: 20px;
     margin-left: 15px;
+}
+
+label {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.disposition_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fonct_form {
+    margin-top: 2rem;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 /* PLANNING */
@@ -114,6 +151,13 @@ body {
     z-index: 1;
 }
 
+.menu-latéral h2 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .menu-latéral p {
     color: white;
 }
@@ -142,6 +186,7 @@ body {
 
 .menu-item {
     list-style: none;
+    color: white;
 }
 
 .menu-item:hover {
@@ -158,6 +203,9 @@ body {
     background-color: #555;
 }
 
+.sub-items a {
+    color: white;
+}
 
 .planning{
     display: flex;
@@ -219,7 +267,6 @@ h1 {
 .grille-planning {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
 }
 
 .jour {
@@ -243,6 +290,7 @@ h1 {
 .cases-tableau li {
     flex: 0 0 48%; 
     margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .divider {
@@ -287,6 +335,7 @@ h1 {
     width: 340px;
     background: #2c2c2c;
     padding: 47px;
+    margin: 3rem;
     padding-bottom: 57px;
     color: #fff;
     border-radius: 17px;

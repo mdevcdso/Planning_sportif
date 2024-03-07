@@ -1,6 +1,8 @@
 <?php
 // create_account_controller.php
 require_once '../modele/config.php';
+require_once '../modele/planning.php';
+require_once '../modele/posseder.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'];
@@ -41,6 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $requeteCompte = $connexion->prepare("INSERT INTO compte (sport_choisi, id_utilisateur) VALUES (:sport, :id_utilisateur)");
                 $requeteCompte->execute([
                     ":sport" => $sport,
+                    ":id_utilisateur" => $id_utilisateur
+                ]);
+
+                $requetePlanning = $connexion->prepare("INSERT INTO planning (id_utilisateur)VALUES (:id_utilisateur)");
+                $requetePlanning->execute([
                     ":id_utilisateur" => $id_utilisateur
                 ]);
 

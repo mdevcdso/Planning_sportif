@@ -49,9 +49,9 @@ for ($i = 0; $i < 7; $i++) {
                             <?php foreach ($matchsGroupedByDate[$date] ?? [] as $match): ?>
                                 <li>
                                     <h4><?= $match['titre']; ?></h4>
-                                    <p><?= date('H:i', strtotime($match['date_match'])); ?> - <?= date('H:i', strtotime($match['date_match'] . ' + ' . $match['duree'])); ?></p>
-                                    <p><?= date('d/m/Y', strtotime($match['date_match'])); ?></p>
-                                    <p><?= $match['lieu_match']; ?></p>
+                                        <p><?= date('H:i', strtotime($match['date_match']))?> <?=  $match['duree']; ?> h</p>
+                                        <p><?= date('d/m/Y', strtotime($match['date_match'])); ?></p>
+                                        <p><?= $match['lieu_match']; ?></p>
 
                                     <!-- Afficher le nom des équipes et le bouton pour saisir les équipes et joueurs -->
                                     <?php $equipesMatch = Equipes::getEquipesForMatch($match['Id_Matchs']); ?>
@@ -63,6 +63,21 @@ for ($i = 0; $i < 7; $i++) {
                                     <?php else: ?>
                                         <a href="../vue/ajouter_equipes_joueurs.php?id_match=<?= $match['Id_Matchs']; ?>"><button>Ajouter des équipes</button></a>
                                     <?php endif; ?>
+
+                                    <?php if (!empty($match['score']) || $match['score'] != '0'): ?>
+                                        <!-- Si le score est défini, afficher le score -->
+                                        <p>Score : <?= $match['score']; ?></p>
+                                    <?php else: ?>
+                                        <!-- Sinon, afficher le bouton pour saisir les scores -->
+                                        <button class="show-score-form" data-match-id="<?= $match['Id_Matchs']; ?>">Saisir les scores</button>
+                                    <?php endif; ?>
+                                    <!-- Formulaire de saisie des scores -->
+                                    <form action="../controleur/saisir_scores_controller.php" class="score-form" style="display: none;" method="POST">
+                                        <label for="score">Score :</label>
+                                        <input type="text" name="score" placeholder="Format : 15 - 5" required>
+                                        <input type="hidden" name="match_id" value="<?= $match['Id_Matchs'] ?>">
+                                        <input type="submit" value="Enregistrer">
+                                    </form>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -72,3 +87,21 @@ for ($i = 0; $i < 7; $i++) {
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Sélectionnez tous les boutons "Saisir les scores"
+        var scoreButtons = document.querySelectorAll('.show-score-form');
+
+        // Pour chaque bouton, ajoutez un gestionnaire d'événements onclick
+        scoreButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                // Trouvez le formulaire de saisie des scores correspondant
+                var scoreForm = this.parentNode.querySelector('.score-form');
+
+                // Affichez le formulaire
+                scoreForm.style.display = 'block';
+            });
+        });
+    });
+</script>

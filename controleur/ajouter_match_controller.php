@@ -28,19 +28,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $date_match = $_POST['date_match'];
             $lieu_match = $_POST['lieu_match'];
             $description_match = $_POST['description_match'];
-            $score = $_POST['score'];
+
+            $etat_match = 'en_attente';
 
             try {
 
                 // Insertion des informations du match
-                $query = "INSERT INTO matchs (titre, duree, date_match, lieu_match, description_match, score, id_utilisateur) VALUES (:titre, :duree, :date_match, :lieu_match, :description_match, :score, :id_utilisateur)";
+                $query = "INSERT INTO matchs (titre, duree, date_match, lieu_match, description_match, id_utilisateur) VALUES (:titre, :duree, :date_match, :lieu_match, :description_match, :id_utilisateur)";
                 $stmt = $bdd->prepare($query);
                 $stmt->bindParam(':titre', $titre);
                 $stmt->bindParam(':duree', $duree);
                 $stmt->bindParam(':date_match', $date_match);
                 $stmt->bindParam(':lieu_match', $lieu_match);
                 $stmt->bindParam(':description_match', $description_match);
-                $stmt->bindParam(':score', $score);
                 $stmt->bindParam(':id_utilisateur', $id_utilisateur);
                 $stmt->execute();
                 $lastInsertedMatchId = $bdd->lastInsertId();

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../vue/styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container3">
         <div class="login wrap">
             <h1>
                 Création de compte
@@ -54,7 +54,7 @@
                 </label>
 
                 <label for="Sport" style="display: block; margin-top: 1rem;">
-                    Sport(s) de préférence : 
+                    Sport de préférence : 
                     <select name="sport" id="Sport">
                         <?php
                             // Inclure la configuration de la base de données ici
@@ -77,7 +77,7 @@
                 
                 <div style="display: flex; justify-content: space-around; align-items: baseline;">
                     <input type="submit" value="Créer le compte" class="btn" style="width: auto;">
-                    <a href="/vue/connexion.html" style="margin-left: 0.5rem; color: white;">Connexion</a>
+                    <a href="../vue/connexion.php" style="margin-left: 0.5rem; color: white;">Connexion</a>
                 </div>
             </form>
         </div>

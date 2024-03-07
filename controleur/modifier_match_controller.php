@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_match = $_POST['match_id'];
     $nouveau_titre = $_POST['nouveau_titre'];
     $nouvelle_date = $_POST['nouvelle_date'];
+    $nouvelle_duree = $_POST['nouvelle_duree'];
     $nouveau_lieu = $_POST['nouveau_lieu'];
     $nouvelle_description = $_POST['nouvelle_description'];
     $nouveau_score = $_POST['nouveau_score'];
@@ -22,6 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!empty($nouvelle_date)) {
         $match_actuel['date_match'] = $nouvelle_date;
+    }
+
+    if (!empty($nouvelle_duree)) {
+        $match_actuel['duree'] = $nouvelle_duree;
     }
 
     if (!empty($nouveau_lieu)) {

@@ -7,23 +7,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supprimer un match</title>
     <link rel="stylesheet" href="../vue/styles.css">
+    <style>
+        select {
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
+    <div class="bouton-menu">
+        <button onclick="toggleMenu()">Menu</button>
+    </div>
+    <div class="menu-latéral">
+        <h2>Menu</h2>
+        <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
+        <?php require('../controleur/menu.php'); ?>
+        <ul class="menu">
+            <?php foreach ($menuItems as $menuItem): ?>
+                <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
+                    <?= $menuItem['name']; ?>
+                    <?php if (!empty($menuItem['subItems'])): ?>
+                        <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
+                            <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
+                                <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+
     <h1>Supprimer un match</h1>
 
-    <form action="../controleur/supprimer_match_controller.php" method="post">
-        <label for="match">Sélectionner le match à supprimer :</label>
-        <select name="match_id" id="match_id">
-            <?php
-                require_once '../modele/matchs.php';
-                $matchs = Matchs::getMatchs();
-                foreach ($matchs as $match) {
-                    echo "<option value='{$match['Id_Matchs']}'>{$match['titre']}</option>";
-                }            
-            ?>
-        </select>
+    <div class="disposition_form">
+        <form action="../controleur/supprimer_match_controller.php" class="fonct_form" method="post">
+            <label for="match">Sélectionner le match à supprimer :</label>
+            <select name="match_id" id="match_id">
+                <?php
+                    require_once '../modele/matchs.php';
+                    $matchs = Matchs::getMatchs();
+                    foreach ($matchs as $match) {
+                        echo "<option value='{$match['Id_Matchs']}'>{$match['titre']}</option>";
+                    }            
+                ?>
+            </select>
 
-        <input type="submit" value="Supprimer le match">
-    </form>
+            <input type="submit" value="Supprimer le match">
+        </form>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var titre = document.querySelector('h1');
+            var menu = document.querySelector('.menu-latéral');
+            var contenu = document.querySelector('.planning');
+            var bouton = document.querySelector('.bouton-menu button');
+            
+            titre.classList.toggle('titre-decalé');
+            menu.classList.toggle('visible');
+            contenu.classList.toggle('contenu-decalé');
+            bouton.classList.toggle('bouton-decalé');
+        }
+
+        function fermerMenu() {
+            var titre = document.querySelector('h1');
+            var menu = document.querySelector('.menu-latéral');
+            var contenu = document.querySelector('.planning');
+            var bouton = document.querySelector('.bouton-menu button');
+
+            titre.classList.remove('titre-decalé');
+            menu.classList.remove('visible');
+            contenu.classList.remove('contenu-decalé');
+            bouton.classList.remove('bouton-decalé');
+        }
+
+        const menuItems = document.querySelectorAll('[data-menu]');
+        menuItems.forEach(menuItem => {
+            menuItem.addEventListener('mouseover', () => {
+                const submenuName = menuItem.getAttribute('data-menu');
+                const submenu = document.querySelector(`[data-submenu="${submenuName}"]`);
+                if (submenu) {
+                    submenu.style.display = 'block';
+                }
+            });
+
+            menuItem.addEventListener('mouseout', () => {
+                const submenuName = menuItem.getAttribute('data-menu');
+                const submenu = document.querySelector(`[data-submenu="${submenuName}"]`);
+                if (submenu) {
+                    submenu.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

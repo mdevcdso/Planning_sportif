@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once '../modele/config.php';
 
 if (!isset($_SESSION['email_utilisateur'])) {
@@ -33,11 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifier si la mise à jour s'est effectuée avec succès
     if ($requeteUpdateMdp) {
         // Rediriger vers la page des paramètres avec un message de succès
-        header('Location: ../vue/planning.php?success=1');
+        header('Location: ../vue/connexion.php?success=1');
         exit();
     } else {
         // Rediriger vers la page des paramètres avec un message d'erreur
-        header('Location: ../vue/planning.php?error=2');
+        header('Location: ../vue/connexion.php?error=2');
         exit();
     }
 }

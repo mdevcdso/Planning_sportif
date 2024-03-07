@@ -24,6 +24,7 @@
                 <label for="Mot de passe">
                     Mot de passe : 
                     <input type="password" name="mdp" required style="width: 20rem; height: 1.5rem;">
+                    <a href="../vue/parametres.php" style="color: white; font-size: 13px;">Mot de passe oublié</a>
                 </label>
                 
                 <div style="display: flex; justify-content: space-around; align-items: baseline;">

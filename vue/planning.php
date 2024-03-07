@@ -31,7 +31,7 @@ $joueurs = Joueurs::getJoueurs();
                 <button onclick="toggleMenu()">Menu</button>
             </div>
             <div class="menu-latéral">
-                <h2 style="color: white;">Menu</h2>
+                <h2>Menu</h2>
                 <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
                 <?php require('../controleur/menu.php'); ?>
                 <ul class="menu">
