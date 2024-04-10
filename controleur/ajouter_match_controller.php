@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $duree = $_POST['duree'];
             $date_match = $_POST['date_match'];
             $lieu_match = $_POST['lieu_match'];
+            $id_sport = $_POST['Id_Sport'];
             $description_match = $_POST['description_match'];
 
             $etat_match = 'en_attente';
@@ -45,6 +46,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute();
                 $lastInsertedMatchId = $bdd->lastInsertId();
 
+                // Recherche de l'ID planning correspondant à l'ID utilisateur
+                $queryPlanning = "SELECT id_planning FROM Planning WHERE id_utilisateur = :id_utilisateur";
+                $stmtPlanning = $bdd->prepare($queryPlanning);
+                $stmtPlanning->bindParam(':id_utilisateur', $id_utilisateur);
+                $stmtPlanning->execute();
+                $resultPlanning = $stmtPlanning->fetch(PDO::FETCH_ASSOC);
+
+                if ($resultPlanning) {
+                    $id_planning = $resultPlanning['id_planning'];
+
+                    // Insertion dans la table Afficher
+                    $queryAfficher = "INSERT INTO Afficher (id_planning, Id_Matchs, date_match) VALUES (:id_planning, :Id_Matchs, :date_match)";
+                    $stmtAfficher = $bdd->prepare($queryAfficher);
+                    $stmtAfficher->bindParam(':id_planning', $id_planning);
+                    $stmtAfficher->bindParam(':Id_Matchs', $lastInsertedMatchId);
+                    $stmtAfficher->bindParam(':date_match', $date_match);
+                    $stmtAfficher->execute();
+
+                    // Insertion dans la table Concerner pour lier le match au sport
+                    $queryConcerner = "INSERT INTO Concerner (Id_Matchs, Id_Sport) VALUES (:Id_Matchs, :Id_Sport)";
+                    $stmtConcerner = $bdd->prepare($queryConcerner);
+                    $stmtConcerner->bindParam(':Id_Matchs', $lastInsertedMatchId);
+                    $stmtConcerner->bindParam(':Id_Sport', $id_sport);
+                    $stmtConcerner->execute();
+                } else {
+                    echo "L'ID du planning n'a pas pu être récupéré.";
+                }
 
             } catch (PDOException $e) {
                 // Gérez les erreurs liées à la base de données ici

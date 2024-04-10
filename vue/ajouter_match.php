@@ -16,17 +16,21 @@
         <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
         <?php require('../controleur/menu.php'); ?>
         <ul class="menu">
-            <?php foreach ($menuItems as $menuItem): ?>
-                <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
-                    <?= $menuItem['name']; ?>
-                    <?php if (!empty($menuItem['subItems'])): ?>
-                        <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
-                            <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
-                                <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </li>
+            <?php foreach ($menuItems as $key => $menuItem): ?>
+                <?php if (is_array($menuItem)): ?>
+                    <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
+                        <?= $menuItem['name']; ?>
+                        <?php if (!empty($menuItem['subItems'])): ?>
+                            <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
+                                <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
+                                    <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
+                <?php else:?>
+                    <li class="menu-item"><a href="<?= $menuItem; ?>"><?= $key; ?></a></li>
+                <?php endif; ?>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -45,6 +49,28 @@
 
             <label for="lieu_match">Lieu :</label>
             <input type="text" name="lieu_match" required><br>
+
+            <label for="Sport" style="display: block; margin-top: 1rem;">
+                Sport concerné : 
+                <select name="Id_Sport" id="Sport">
+                    <?php
+                        // Inclure la configuration de la base de données ici
+                        require_once '../modele/config.php';
+                        require_once '../modele/sport.php';
+
+                        // Sélectionner tous les sports depuis la table Sport
+                        $result = Sport::getNomsSports();
+
+                        // Boucler à travers les résultats et créer une option pour chaque sport
+                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="' . $row['Id_Sport'] . '">' . $row['nom_sport'] . '</option>';
+                        }
+
+                        // Fermer la connexion à la base de données
+                        $connexion = null;
+                    ?>
+                </select>
+            </label>
 
             <label for="description_match">Description :</label>
             <textarea name="description_match" rows="4" cols="50"></textarea><br>

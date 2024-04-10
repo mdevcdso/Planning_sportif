@@ -9,10 +9,14 @@ class Concerner {
         $this->id_sport = $idSport;
     }
 
-    // Getters et Setters
-    // ...
+    // Dans concerner.php
+    public static function supprimerConcernerPourMatch($idMatch) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "DELETE FROM concerner WHERE Id_Matchs = :idMatch";
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':idMatch', $idMatch, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 
-    // Méthodes CRUD
-    // ...
 }
 ?>

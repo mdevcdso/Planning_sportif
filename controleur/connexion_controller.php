@@ -8,10 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérifier les informations de connexion dans la base de données
     require_once '../modele/utilisateur.php';
-    if (Utilisateur::verifierConnexion($email, $mdp)) {
+
+    $userData = Utilisateur::verifierConnexion($email, $mdp);
+    if ($userData) {
         // Connexion réussie, démarrer la session et stocker l'identifiant de l'utilisateur
         session_start();
         $_SESSION['email_utilisateur'] = $email;
+        $_SESSION['user_role'] = $userData['role'];
         
         header('Location: ../vue/planning.php');
         exit();

@@ -17,17 +17,21 @@
         <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
         <?php require('../controleur/menu.php'); ?>
         <ul class="menu">
-            <?php foreach ($menuItems as $menuItem): ?>
-                <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
-                    <?= $menuItem['name']; ?>
-                    <?php if (!empty($menuItem['subItems'])): ?>
-                        <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
-                            <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
-                                <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </li>
+            <?php foreach ($menuItems as $key => $menuItem): ?>
+                <?php if (is_array($menuItem)): ?>
+                    <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
+                        <?= $menuItem['name']; ?>
+                        <?php if (!empty($menuItem['subItems'])): ?>
+                            <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
+                                <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
+                                    <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
+                <?php else:?>
+                    <li class="menu-item"><a href="<?= $menuItem; ?>"><?= $key; ?></a></li>
+                <?php endif; ?>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -37,56 +41,80 @@
 
     <div class="disposition_form">
         <form action="../controleur/ajouter_equipes_controller.php" class="fonct_form" method="POST">
-            <label for="equipe1">Équipe 1 :</label>
-            <input type="text" name="equipe1" required><br>
+            <div class = "disposition_ajouter_equipes">
+                <div style = "margin-right: 2rem;">
+                    <div class = "champs_remplir">
+                        <label for="equipe1">Équipe 1 :</label>
+                        <input type="text" name="equipe1" required><br>
+                    </div>
 
-            <label for="nombre_joueurs1">Nombre de joueurs dans l'équipe 1 :</label>
-            <input type="number" name="nombre_joueurs1" required><br>
+                    <div class = "champs_remplir">
+                        <label for="nombre_joueurs1">Nombre de joueurs dans l'équipe 1 :</label>
+                        <input type="number" name="nombre_joueurs1" required><br>
+                    </div>
 
-            <label for="nom_entraineur1">Nom de l'entraineur de l'équipe 1 :</label>
-            <input type="text" name="nom_entraineur1" required><br>
+                    <div class = "champs_remplir">
+                        <label for="nom_entraineur1">Nom de l'entraineur de l'équipe 1 :</label>
+                        <input type="text" name="nom_entraineur1" required><br>
+                    </div>
 
-            <label for="nombre_victoire1">Nombre de victoires de l'équipe 1 :</label>
-            <input type="number" name="nombre_victoire1" required><br>
+                    <div class = "champs_remplir">
+                        <label for="nombre_victoire1">Nombre de victoires de l'équipe 1 :</label>
+                        <input type="number" name="nombre_victoire1" required><br>
+                    </div>
 
-            <label for="nombre_defaite1">Nombre de défaites de l'équipe 1 :</label>
-            <input type="number" name="nombre_defaite1" required><br>
+                    <div class = "champs_remplir">
+                        <label for="nombre_defaite1">Nombre de défaites de l'équipe 1 :</label>
+                        <input type="number" name="nombre_defaite1" required><br>
+                    </div>
 
 
-            <!-- Joueurs de l'équipe 1 -->
-            <label for="joueurs_equipe1">Joueurs de l'équipe 1 :</label>
-            <div id="joueurs_equipe1_container">
-                <!-- Champ pour le premier joueur -->
-                <input type="text" name="joueur_equipe1[]" placeholder="Nom, Prénom, Âge, Rôle" required><br>
+                    <!-- Joueurs de l'équipe 1 -->
+                    <label for="joueurs_equipe1">Joueurs de l'équipe 1 :</label>
+                    <div id="joueurs_equipe1_container">
+                        <!-- Champ pour le premier joueur -->
+                        <input type="text" name="joueur_equipe1[]" placeholder="Nom, Prénom, Âge, Rôle" required><br>
+                    </div>
+                    <button type="button" onclick="ajouterJoueur('joueurs_equipe1_container')">Ajouter un joueur</button><br>
+                </div>
+
+                <div>
+                    <div class = "champs_remplir">
+                        <label for="equipe2">Équipe 2 :</label>
+                        <input type="text" name="equipe2" required><br>
+                    </div>
+
+                    <div class = "champs_remplir">
+                        <label for="nombre_joueurs2">Nombre de joueurs dans l'équipe 2 :</label>
+                        <input type="number" name="nombre_joueurs2" required><br>
+                    </div>
+
+                    <div class = "champs_remplir">
+                        <label for="nom_entraineur2">Nom de l'entraineur de l'équipe 2 :</label>
+                        <input type="text" name="nom_entraineur2" required><br>
+                    </div>
+
+                    <div class = "champs_remplir">
+                        <label for="nombre_victoire2">Nombre de victoires de l'équipe 2 :</label>
+                        <input type="number" name="nombre_victoire2" required><br>
+                    </div>
+
+                    <div class = "champs_remplir">
+                        <label for="nombre_defaite2">Nombre de défaites de l'équipe 2 :</label>
+                        <input type="number" name="nombre_defaite2" required><br>
+                    </div>
+
+                    <!-- Joueurs de l'équipe 2 -->
+                    <label for="joueurs_equipe2">Joueurs de l'équipe 2 :</label>
+                    <div id="joueurs_equipe2_container">
+                        <!-- Champ pour le premier joueur -->
+                        <input type="text" name="joueur_equipe2[]" placeholder="Nom, Prénom, Âge, Rôle" required><br>
+                    </div>
+                    <button type="button" onclick="ajouterJoueur('joueurs_equipe2_container')">Ajouter un joueur</button><br>
+                </div>
             </div>
-            <button type="button" onclick="ajouterJoueur('joueurs_equipe1_container')">Ajouter un joueur</button><br>
 
-
-            <label for="equipe2">Équipe 2 :</label>
-            <input type="text" name="equipe2" required><br>
-
-            <label for="nombre_joueurs2">Nombre de joueurs dans l'équipe 2 :</label>
-            <input type="number" name="nombre_joueurs2" required><br>
-
-            <label for="nom_entraineur2">Nom de l'entraineur de l'équipe 2 :</label>
-            <input type="text" name="nom_entraineur2" required><br>
-
-            <label for="nombre_victoire2">Nombre de victoires de l'équipe 2 :</label>
-            <input type="number" name="nombre_victoire2" required><br>
-
-            <label for="nombre_defaite2">Nombre de défaites de l'équipe 2 :</label>
-            <input type="number" name="nombre_defaite2" required><br>
-
-
-            <!-- Joueurs de l'équipe 2 -->
-            <label for="joueurs_equipe2">Joueurs de l'équipe 2 :</label>
-            <div id="joueurs_equipe2_container">
-                <!-- Champ pour le premier joueur -->
-                <input type="text" name="joueur_equipe2[]" placeholder="Nom, Prénom, Âge, Rôle" required><br>
-            </div>
-            <button type="button" onclick="ajouterJoueur('joueurs_equipe2_container')">Ajouter un joueur</button><br>
-
-            <input type="submit" value="Ajouter">
+            <input type="submit" value="Ajouter" style = "width: 4rem; height: 2rem;">
         </form>
     </div>
 

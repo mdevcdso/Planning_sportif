@@ -24,6 +24,9 @@
                 <label for="Mot de passe">
                     Mot de passe : 
                     <input type="password" name="mdp" required style="width: 20rem; height: 1.5rem;">
+                    <button type="button" class="afficher_mdp" onclick="togglePasswordVisibility()" style="margin-right: 20px;">
+                        <img src="../img/oeil.png" alt="oeil">
+                    </button>
                     <a href="../vue/parametres.php" style="color: white; font-size: 13px;">Mot de passe oublié</a>
                 </label>
                 
@@ -34,6 +37,15 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            var newPasswordInput = document.querySelector("input[name='mdp']");
+
+            // Basculer le type entre "password" et "text"
+            newPasswordInput.type = newPasswordInput.type === "password" ? "text" : "password";
+        }
+    </script>
 </body>
 </html>
 <?php

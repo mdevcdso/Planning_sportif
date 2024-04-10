@@ -4,6 +4,8 @@ require_once '../modele/matchs.php';
 require_once '../modele/equipes.php';
 require_once '../modele/joueurs.php';
 require_once '../modele/participer.php';
+require_once '../modele/afficher.php';
+require_once '../modele/concerner.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $matchId = $_POST['match_id'];
@@ -34,6 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 Participer::supprimerParticipationsPourMatch($matchId);
             }
         }
+
+        //Supprimer l'affichage pour ce match
+        Afficher::supprimerAffichagePourMatch($matchId);
+
+        //Supprimer les données concernées pour ce match
+        Concerner::supprimerConcernerPourMatch($matchId);
+        
         // Supprimer le match
          $success = Matchs::supprimerMatch($matchId);
 

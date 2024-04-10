@@ -22,17 +22,21 @@
         <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
         <?php require('../controleur/menu.php'); ?>
         <ul class="menu">
-            <?php foreach ($menuItems as $menuItem): ?>
-                <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
-                    <?= $menuItem['name']; ?>
-                    <?php if (!empty($menuItem['subItems'])): ?>
-                        <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
-                            <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
-                                <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </li>
+            <?php foreach ($menuItems as $key => $menuItem): ?>
+                <?php if (is_array($menuItem)): ?>
+                    <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
+                        <?= $menuItem['name']; ?>
+                        <?php if (!empty($menuItem['subItems'])): ?>
+                            <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
+                                <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
+                                    <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
+                <?php else:?>
+                    <li class="menu-item"><a href="<?= $menuItem; ?>"><?= $key; ?></a></li>
+                <?php endif; ?>
             <?php endforeach; ?>
         </ul>
     </div>

@@ -11,7 +11,7 @@ class Sport {
     // Getters et Setters
     public static function getNomsSports() {
         $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
-        $query = "SELECT nom_sport FROM sport";
+        $query = "SELECT Id_Sport, nom_sport FROM sport";
         $stmt = $bdd->prepare($query);
         $stmt->execute();
         return $stmt;

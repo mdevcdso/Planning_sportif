@@ -45,6 +45,11 @@
                     <input type="password" name="mdp" required style="width: 20rem; height: 1.5rem;">
                 </label>
 
+                <label for="Confirmation Mot de passe">
+                    Confirmation du mot de passe : 
+                    <input type="password" name="confirmer_mot_de_passe" required style="width: 20rem; height: 1.5rem;">
+                </label>
+
                 <label for="Role">
                     Rôle : 
                     <select name="role" id="Role">
@@ -91,6 +96,7 @@ $nom;
 $genre;
 $email;
 $mdp;
+$confirmerMotDePasse;
 $role;
 $sport;
 ?>

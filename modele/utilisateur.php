@@ -30,7 +30,7 @@ class Utilisateur {
 
         if ($user && password_verify($motDePasse, $user['mot_de_passe'])) {
             // La vérification a réussi
-            return true;
+            return $user;
         } else {
             // La vérification a échoué
             return false;

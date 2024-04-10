@@ -22,17 +22,21 @@
         <button class="fermer-menu" onclick="fermerMenu()"><img src="../img/close.svg" alt="close"></button>
         <?php require('../controleur/menu.php'); ?>
         <ul class="menu">
-            <?php foreach ($menuItems as $menuItem): ?>
-                <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
-                    <?= $menuItem['name']; ?>
-                    <?php if (!empty($menuItem['subItems'])): ?>
-                        <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
-                            <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
-                                <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </li>
+            <?php foreach ($menuItems as $key => $menuItem): ?>
+                <?php if (is_array($menuItem)): ?>
+                    <li class="menu-item" data-menu="<?= $menuItem['name']; ?>">
+                        <?= $menuItem['name']; ?>
+                        <?php if (!empty($menuItem['subItems'])): ?>
+                            <ul class="sub-items" data-submenu="<?= $menuItem['name']; ?>">
+                                <?php foreach ($menuItem['subItems'] as $subItemName => $subItemLink): ?>
+                                    <li class="sub-item"><a href="<?= $subItemLink; ?>"><?= $subItemName; ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </li>
+                <?php else:?>
+                    <li class="menu-item"><a href="<?= $menuItem; ?>"><?= $key; ?></a></li>
+                <?php endif; ?>
             <?php endforeach; ?>
         </ul>
     </div>
@@ -67,13 +71,39 @@
             <label for="nouveau_lieu">Nouveau lieu :</label>
             <input type="text" name="nouveau_lieu">
 
+            <label for="nouveau_sport" style="display: block; margin-top: 1rem;">
+                Nouveau sport : 
+                <select name="nouveau_sport" id="Sport">
+                    <?php
+                        // Inclure la configuration de la base de données ici
+                        require_once '../modele/config.php';
+                        require_once '../modele/sport.php';
+
+                        // Sélectionner tous les sports depuis la table Sport
+                        $result = Sport::getNomsSports();
+
+                        // Boucler à travers les résultats et créer une option pour chaque sport
+                        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                            echo '<option value="' . $row['Id_Sport'] . '">' . $row['nom_sport'] . '</option>';
+                        }
+
+                        // Fermer la connexion à la base de données
+                        $connexion = null;
+                    ?>
+                </select>
+            </label>
+
             <label for="nouvelle_description">Nouvelle description :</label>
             <input type="text" name="nouvelle_description">
 
             <label for="nouveau_score">Nouveau score :</label>
             <input type="text" name="nouveau_score">
 
-            <input type="submit" value="Modifier">
+            <!-- Dans modifier_match.php, ajoutez cette case à cocher au formulaire -->
+            <!-- <label for="match_termine">Match terminé :</label>
+            <input type="checkbox" name="match_termine" id="match_termine" value="1"> -->
+
+            <input type="submit" value="Modifier" style = "width: 4rem; height: 2rem; margin-top: 1rem;">
         </form>
     </div>
 

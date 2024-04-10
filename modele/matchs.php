@@ -49,6 +49,58 @@ class Matchs {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function getMatchByCriteria($titre = null, $dateMatch = null, $equipeMatch = null) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        // Initialisation de la requête avec des jointures conditionnelles
+        $query = "SELECT DISTINCT m.* FROM Matchs m";
+        $params = [];
+        $conditions = [];
+        
+        // Ajout conditionnel des jointures et des conditions en fonction des critères fournis
+        if (!is_null($dateMatch) || !is_null($equipeMatch)) {
+            $query .= " LEFT JOIN Afficher a ON m.Id_Matchs = a.Id_Matchs";
+            $query .= " LEFT JOIN Participer p ON m.Id_Matchs = p.Id_Matchs";
+            $query .= " LEFT JOIN Equipes e ON p.id_equipe = e.id_equipe";
+        }
+        
+        // Filtrage par titre si fourni
+        if (!is_null($titre)) {
+            $conditions[] = "m.titre LIKE :titre";
+            $params[':titre'] = "%$titre%";
+        }
+        
+        // Filtrage par date si fournie
+        if (!is_null($dateMatch)) {
+            $conditions[] = "a.date_match = :date_match";
+            $params[':date_match'] = $dateMatch;
+        }
+        
+        // Filtrage par nom d'équipe si fourni
+        if (!is_null($equipeMatch)) {
+            $conditions[] = "e.nom_equipe LIKE :nom_equipe";
+            $params[':nom_equipe'] = "%$equipeMatch%";
+        }
+        
+        // S'il existe des conditions, les ajouter à la requête
+        if (count($conditions) > 0) {
+            $query .= " WHERE " . implode(" AND ", $conditions);
+        }
+        
+        $stmt = $bdd->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getMatchByTitre($titre) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "SELECT * FROM matchs WHERE titre LIKE :titre";
+        $stmt = $bdd->prepare($query);
+        $likeTitre = "%" . $titre . "%";
+        $stmt->bindParam(':titre', $likeTitre, PDO::PARAM_STR);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }    
+
     public static function getLastInsertedMatchId() {
         $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
         $query = "SELECT MAX(Id_Matchs) AS last_inserted_id FROM matchs";

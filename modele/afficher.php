@@ -11,10 +11,14 @@ class Afficher {
         $this->date_match = $dateMatch;
     }
 
-    // Getters et Setters
-    // ...
+    // Dans afficher.php
+    public static function supprimerAffichagePourMatch($idMatch) {
+        $bdd = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $query = "DELETE FROM afficher WHERE Id_Matchs = :idMatch";
+        $stmt = $bdd->prepare($query);
+        $stmt->bindParam(':idMatch', $idMatch, PDO::PARAM_INT);
+        $stmt->execute();
+    }
 
-    // Méthodes CRUD
-    // ...
 }
 ?>
